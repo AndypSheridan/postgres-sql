@@ -6,8 +6,41 @@ connection = psycopg2.connect(database="chinook")
 # Build a cursor object og the database
 cursor = connection.cursor()
 
+# Query 1 - select all records from the "Artist" table
+# cursor.execute('SELECT * FROM "Artist"')
+
+# Query 2 - select only the name column from the "Artist" table
+# cursor.execute('SELECT "Name" FROM "Artist"')
+
+# Query 3 - select only "Queen" from the artist table
+# cursor.execute('SELECT * FROM "Artist" WHERE "Name" = %s', ["Queen"])
+
+# Query 4 - select only the artist id from the "Artist" table
+# cursor.execute('SELECT * FROM "Artist" WHERE "ArtistId" = %s', [51])
+
+
+# Query 5 - select only the albums with "ArtistId" #51 on the "Album" table
+# cursor.execute('SELECT * FROM "Album" WHERE "ArtistId" = %s', [51])
+
+
+# Query 6 - select all tracks where the composer is "Queen" from the "Track" table
+# cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Queen"])
+
+# Query 7 - select all tracks where the composer is "AC-DC" from the "Track" table
+# cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["AC/DC"])
+
+# Query 8 - Fake result - select only "test" from the "Artist" table
+cursor.execute('SELECT * FROM "Artist" WHERE "Name" = %s', ["Test"])
+
 # Fetch the results (multiple)
 results = cursor.fetchall()
 
 # Fetch the result (single)
 # results = cursor.fetchone()
+
+# Close the connection
+connection.close()
+
+# Print results
+for result in results:
+    print(result)
